@@ -1,5 +1,6 @@
-import { Controller, Get, Post, Body } from "@nestjs/common";
+import { Controller, Get, Post, Body, Param, Delete } from "@nestjs/common";
 import { CreateTrackDto } from "./dto/create-track.dto";
+import { CreateCommentDto } from "./dto/create-comment.dto";
 import {TrackService} from "./track.service"
 
 @Controller('tracks')
@@ -7,20 +8,25 @@ export class TrackController {
 
     constructor(private trackService: TrackService) {}
 
+
     @Post()
     create(@Body() dto: CreateTrackDto) {
-        this.trackService.create(dto)
+        return this.trackService.create(dto)
     }
     @Get()
     getAll() {
-        return 'HEEEELOO111'
+        return this.trackService.getAll();
     }
-
-    getOne() {
-
+    @Get(':id')
+    getOne(@Param('id') id: number) {
+        return this.trackService.getOne(id)
     }
-
-    delete() {
-        
+    @Delete(':id')
+    delete(@Param('id') id: number) {
+        return this.trackService.delete(id)
+    }
+    @Post('/comment')
+    CreateComment(@Body() dto: CreateCommentDto) {
+        return this.trackService.addComment(dto)
     }
 }

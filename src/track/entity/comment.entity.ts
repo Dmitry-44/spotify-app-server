@@ -7,7 +7,7 @@ export class Comment {
   id: number;
 
   @ManyToOne(() => Track, (track) => track.comments)
-  track: Track;
+  trackId: number;
 
   @Column()
   username: string;
