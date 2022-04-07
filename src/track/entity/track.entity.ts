@@ -24,6 +24,6 @@ export class Track {
   @Column()
   audio: string;
 
-  @OneToMany(() => Comment, (comment) => comment.trackId)
+  @OneToMany(() => Comment, (comment) => comment.track)
   comments: Comment[];
 }

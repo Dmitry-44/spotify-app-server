@@ -5,10 +5,11 @@
     "username": "u1644041_default",
     "password": "yPG2K3CFjDPZja65",
     "database": "u1644041_default",
-    "entities": ["/src/track/entity/*.entity.ts"],
-    "migrations": ["/src/migrations/*.ts"],
+    "entities": ["/dist/track/entity/*.entity.ts"],
+    "synchronize": false,
+    "migrationsRun": true,
+    "migrations": ["dist/migrations/*.js"],
     "cli": {
-      "migrationsDir": "/src/migrations",
-      "entitiesDir": "/src/track/entity"
+      "migrationsDir": "/src/migrations"
     }
   }

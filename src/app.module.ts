@@ -25,7 +25,11 @@ import {Comment} from './track/entity/comment.entity'
             password: 'yPG2K3CFjDPZja65',
             database: 'u1644041_default',
             entities: [Track, Comment],
+            migrations: ["/migrations/**/*{.js,.ts}"],
             synchronize: true,
+            cli: {
+                migrationsDir: "/src/migrations"
+            }
         }),
         TrackModule
     ]

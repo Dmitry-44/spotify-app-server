@@ -17,7 +17,7 @@ export class TrackService {
         private commentsRepository: Repository<Comment>,
     ) {}
 
-    async create(dto: CreateTrackDto): Promise<Track>{
+    async create(dto: CreateTrackDto, picture, audio): Promise<Track>{
         const track = await this.tracksRepository.save({...dto, listens: 0})
         return track
     }
@@ -28,7 +28,7 @@ export class TrackService {
     }
 
     async getOne(id: number): Promise<Track> {
-        const track = await this.tracksRepository.query('SELECT * FROM track WHERE id = ?', [id])
+        const track = await this.tracksRepository.findOne({id: id})
         return track
     }
 
@@ -37,10 +37,11 @@ export class TrackService {
     }
 
     async addComment(dto: CreateCommentDto): Promise<Comment> {
-        let track = await this.tracksRepository.query('SELECT * FROM track WHERE id = ?', [dto.trackId])
+        let track = await this.tracksRepository.findOne({id: dto.track_id})
         console.log('track', track)
         const comment = await this.commentsRepository.save({...dto})
-        track.comments.push(comment?.id)
+        track.comments = [comment]
+        console.log('track', track)
         await this.tracksRepository.save(track)
         return comment
     }
